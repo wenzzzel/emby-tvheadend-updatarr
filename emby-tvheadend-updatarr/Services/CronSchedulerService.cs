@@ -38,7 +38,7 @@ public class CronSchedulerService : BackgroundService
     {
         if (_config.RunOnce)
         {
-            //Run your stuff here
+            _logger.LogInformation("RUNNING ONCE!");
             return;
         }
 

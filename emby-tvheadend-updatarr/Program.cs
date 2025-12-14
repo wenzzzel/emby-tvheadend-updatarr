@@ -1,4 +1,5 @@
-﻿using emby_tvheadend_updatarr.Services;
+﻿using emby_tvheadend_updatarr.Models;
+using emby_tvheadend_updatarr.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,7 +12,14 @@ internal class Program
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureServices((context, services) =>
             {
-                // Register DI like this: services.AddSingleton<IInterface, Implementation>();
+                var appConfig = new AppConfiguration
+                {
+                    CronExpression = Environment.GetEnvironmentVariable("CRON_EXPRESSION"),
+                    RunOnce = bool.Parse(Environment.GetEnvironmentVariable("RUN_ONCE") ?? "false")
+                };
+
+                services.AddSingleton(appConfig);
+                
                 services.AddHostedService<CronSchedulerService>();
             })
             .Build();
