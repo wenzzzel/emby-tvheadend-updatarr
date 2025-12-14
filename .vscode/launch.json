@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {    
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/emby-tvheadend-updatarr/bin/Debug/net9.0/emby-tvheadend-updatarr.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/emby-tvheadend-updatarr",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "env": {
+                "CRON_EXPRESSION": "0 0 * * *",
+                "RUN_ONCE": "true"
+            }
+        }
+    ]
+}
