@@ -2,7 +2,9 @@ using emby_tvheadend_updatarr.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NCrontab;
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace emby_tvheadend_updatarr.Services;
 
@@ -11,13 +13,16 @@ public class CronSchedulerService : BackgroundService
     private readonly ILogger<CronSchedulerService> _logger;
     private readonly AppConfiguration _config;
     private readonly CrontabSchedule? _schedule;
+    private readonly IEmbyTunerService _embyTunerService;
 
     public CronSchedulerService(
         ILogger<CronSchedulerService> logger,
-        AppConfiguration config)
+        AppConfiguration config,
+        IEmbyTunerService embyTunerService)
     {
         _logger = logger;
         _config = config;
+        _embyTunerService = embyTunerService;
 
         if (!string.IsNullOrEmpty(_config.CronExpression))
         {
@@ -38,7 +43,7 @@ public class CronSchedulerService : BackgroundService
     {
         if (_config.RunOnce)
         {
-            _logger.LogInformation("RUNNING ONCE!");
+            await _embyTunerService.RefreshTvHeadendTunersAsync();
             return;
         }
 
@@ -76,7 +81,7 @@ public class CronSchedulerService : BackgroundService
                 _logger.LogInformation("Executing task...");
                 try
                 {
-                    // Execute scheduled task here
+                    await _embyTunerService.RefreshTvHeadendTunersAsync();
                     _logger.LogInformation("Task completed successfully");
                 }
                 catch (Exception ex)

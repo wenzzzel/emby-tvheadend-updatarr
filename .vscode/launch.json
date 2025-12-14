@@ -13,7 +13,9 @@
             "stopAtEntry": false,
             "env": {
                 "CRON_EXPRESSION": "0 0 * * *",
-                "RUN_ONCE": "true"
+                "RUN_ONCE": "true",
+                "EMBY_API_KEY": "putApiKeyHere",
+                "EMBY_SERVER_BASE_URL": "https://your.emby.server.base.url",
             }
         }
     ]
