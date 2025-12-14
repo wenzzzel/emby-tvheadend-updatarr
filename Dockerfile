@@ -25,11 +25,6 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 # Set environment variables with default values
-ENV RUN_MODE=LiveTv
-ENV M3U_INPUT_URL=""
-ENV OUTPUT_PATH="/output"
-ENV GROUPS=""
-ENV CRON_EXPRESSION=""
 ENV RUN_ONCE=false
 
 # Create output directory

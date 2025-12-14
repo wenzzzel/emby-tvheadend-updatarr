@@ -16,7 +16,7 @@ internal class Program
             {
                 var appConfig = new AppConfiguration
                 {
-                    CronExpression = Environment.GetEnvironmentVariable("CRON_EXPRESSION"),
+                    CronExpression = Environment.GetEnvironmentVariable("EMBY_TVHEADEND_UPDATARR_CRON"),
                     RunOnce = bool.Parse(Environment.GetEnvironmentVariable("RUN_ONCE") ?? "false"),
                     EmbyApiKey = Environment.GetEnvironmentVariable("EMBY_API_KEY") ?? throw new ArgumentException("EMBY_API_KEY environment variable is not set"),
                     EmbyServerBaseUrl = Environment.GetEnvironmentVariable("EMBY_SERVER_BASE_URL") ?? throw new ArgumentException("EMBY_SERVER_BASE_URL environment variable is not set"),
